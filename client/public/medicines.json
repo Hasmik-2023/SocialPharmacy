@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Жим лёжа",
+        "image": "https://avatars.dzeninfra.ru/get-zen_doc/5295210/pub_637bdef6dc3cca13ad45fa7e_637bdf4365cbbd650a0e49f2/scale_2400",
+        "description": "Классический жим делается лёжа на спине",
+        "address": "Петровка 8",
+        "maxUsers": "10",
+        "countUsers": "0"
+      },
+      {
+        "name": "Жим лёжа",
+        "image": "https://sportwiki.to/images/6/67/Sil_men.jpg",
+        "description": "Классический жим делается лёжа на спине",
+        "address": "Марксиская 5",
+        "maxUsers": "12",
+        "countUsers": "0"
+      },
+      {
+        "name": "Жим лёжа",
+        "image": "https://sportwiki.to/images/6/67/Sil_men.jpg",
+        "description": "Классический жим делается лёжа на спине",
+        "address": "Советская 2",
+        "maxUsers": "15",
+        "countUsers": "0"
+    }
+]
