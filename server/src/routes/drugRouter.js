@@ -1,8 +1,8 @@
 const express = require('express');
-const { Drug, User } = require('../../db/models');
+const { Drug } = require('../../db/models');
 const drugRouter = express.Router();
 
-drugRouter.get('/drugs', async (req, res) => {
+drugRouter.get('/', async (req, res) => {
   const drugs = await Drug.findAll();
   res.json(drugs);
 });
