@@ -1,73 +1,74 @@
-const authRouter = require('express').Router();
+const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 const generateTokens = require('../utils/generateTokens');
 const cookieConfig = require('../configs/cookie.config');
 
+const authRouter = Router();
+
 authRouter.post('/signup', async (req, res) => {
-  const { email, name, password } = req.body;
-
-  if (!email || !name || !password) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
   try {
-    const [user, created] = await User.findOrCreate({
-      where: { email },
-      defaults: { name, password: await bcrypt.hash(password, 10) },
-    });
+    const { username, email, password } = req.body;
 
-    if (!created) {
-      return res.status(400).json({ error: 'User already exists' });
+    if (!username || !email || !password) {
+      return res.status(400).send({ message: 'Fill all fields' });
     }
-    const plainUser = user.get();
-    delete plainUser.password;
+    const hashpass = await bcrypt.hash(password, 10);
+    const [newUser, created] = await User.findOrCreate({
+      where: { email },
+      defaults: { username, password: hashpass },
+    });
+    if (!created) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
 
-    const { accessToken, refreshToken } = generateTokens({ user: plainUser });
+    const user = newUser.get();
+    delete user.hashpass;
+    const { accessToken, refreshToken } = generateTokens({ user });
 
-    res
-      .cookie('refreshToken', refreshToken, cookieConfig.refresh)
-      .json({ user: plainUser, accessToken });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Server error' });
+    return res
+      .cookie('refreshToken', refreshToken, cookieConfig)
+      .status(200)
+      .json({ accessToken, user });
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
   }
 });
 
 authRouter.post('/signin', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
   try {
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return res.status(400).json({ error: 'Не верный логин или пароль' });
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Fill all fields' });
+    }
+    const foundUser = await User.findOne({
+      where: { email },
+    });
+    if (!foundUser) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+    const isValid = await bcrypt.compare(password, foundUser.password);
+    if (!isValid) {
+      return res.status(400).json({ message: 'Incorrect password' });
     }
 
-    const isValidPassword = await bcrypt.compare(password, user.password);
+    const user = foundUser.get();
+    delete user.password;
+    const { accessToken, refreshToken } = generateTokens({ user });
 
-    if (!isValidPassword) {
-      return res.status(400).json({ error: 'Не верный логин или пароль' });
-    }
-
-    const plainUser = user.get();
-    delete plainUser.password;
-
-    const { accessToken, refreshToken } = generateTokens({ user: plainUser });
-    res
-      .cookie('refreshToken', refreshToken, cookieConfig.refresh)
-      .json({ user: plainUser, accessToken });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Server error' });
+    return res
+      .cookie('refreshToken', refreshToken, cookieConfig)
+      .status(200)
+      .json({ accessToken, user });
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
   }
 });
 
-authRouter.get('/logout', (req, res) => {
-  res.clearCookie('refreshToken')
-    .sendStatus(200);
+authRouter.post('/logout', async (req, res) => {
+  res.clearCookie('refreshToken').sendStatus(200);
 });
 
 module.exports = authRouter;
