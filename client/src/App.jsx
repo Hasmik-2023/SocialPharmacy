@@ -1,10 +1,23 @@
+import React from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import Layout from './components/Layout';
+import MainPage from './components/pages/MainPage';
 
 function App() {
-  // const [count, setCount] = useState(0)
-
-  // return (
-    
-  // )
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        {
+          path: '/',
+          element: <MainPage />,
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
