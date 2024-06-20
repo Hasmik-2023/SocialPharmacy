@@ -17,7 +17,7 @@ module.exports = {
         name: 'Аспирин',
         price: 420,
         description: 'Аспирин обладает обезболивающим, жаропонижающим и противовоспалительным действием. Симптоматическое лечение:Повышенная температура тела при простудных и других инфекционно-воспалительных заболеваниях.',
-        image: '../../public/img/aspirin.jpg',
+        image: '/img/aspirin.jpg',
         count: 100,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -26,7 +26,7 @@ module.exports = {
         name: 'Компливит',
         price: 550,
         description: 'Комбинированный поливитаминный препарат, содержащий минералы, магний и селен, а также экстракты лекарственных растений пустырника.  Витаминный комплекс восполняет дефицит витаминов с учетом суточной потребности .',
-        image: '../../public/img/komplivit.jpg',
+        image: '/img/komplivit.jpg',
         count: 50,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -35,7 +35,7 @@ module.exports = {
         name: 'Парацетамол',
         price: 150,
         description: 'Жаропонижающее средство при острых респираторных заболеваниях и других инфекционновоспалительных заболеваниях, сопровождающихся повышением температуры тела.Обезболивающее средство при болевом синдроме слабой и умеренной выраженности.',
-        image: '../../public/img/paracetamol.jpg',
+        image: '/img/paracetamol.jpg',
         count: 70,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -44,7 +44,7 @@ module.exports = {
         name: 'Пантенол',
         price: 740,
         description: 'Стимулирует регенерацию кожи, слизистых оболочек, нормализует клеточный метаболизм, ускоряет митоз и увеличивает прочность коллагеновых волокон. Оказывает регенерирующее, метаболическое и слабое противовоспалительное действие.',
-        image: '../../public/img/pantenol.jpg',
+        image: '/img/pantenol.jpg',
         count: 40,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -53,7 +53,7 @@ module.exports = {
         name: 'Регидрон',
         price: 850,
         description: 'Регидрон восстанавливает водно-электролитный и кислотно-щелочной баланс. лечение и профилактика тепловых поражений, связанных с нарушением водно-электролитного обменаю.',
-        image: '../../public/img/regidron.jpg',
+        image: '/img/regidron.jpg',
         count: 70,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -62,7 +62,7 @@ module.exports = {
         name: 'Мирамистин',
         price: 530,
         description: 'Обладает широким спектром антимикробного действия, включая госпитальные штаммы, резистентные к антибиотикам.',
-        image: '../../public/img/miramistin.jpg',
+        image: '/img/miramistin.jpg',
         count: 60,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -71,7 +71,7 @@ module.exports = {
         name: 'Лизобакт',
         price: 455,
         description: 'Местный антисептик для лечения боли в горле, содержит защитный фермент лизоцим и витамин В6. Обладает направленным противовирусным и антибактериальным действием.',
-        image: '../../public/img/lizobakt.jpg',
+        image: '/img/lizobakt.jpg',
         count: 90,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -80,7 +80,7 @@ module.exports = {
         name: 'Тандум Верде',
         price: 490,
         description: 'Оказывает противовоспалительное и местное обезболивающее действие, обладает антисептическим действием против широкого спектра микроорганизмов.Симптоматическая терапия болевого синдрома воспалительных заболеваний.',
-        image: '../../public/img/tandumverda.jpeg',
+        image: '/img/tandumverda.jpeg',
         count: 50,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -89,7 +89,7 @@ module.exports = {
         name: 'Гриппферон',
         price: 315,
         description: 'Профилактика и лечение гриппа и ОРВИ у детей от рождения и взрослых, включая беременных женщин.Препарат обладает иммуномодулирующим, противовоспалительным и противовирусным действием.',
-        image: '../../public/img/grippferon.jpg',
+        image: '/img/grippferon.jpg',
         count: 110,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -98,7 +98,7 @@ module.exports = {
         name: 'Граммидин',
         price: 599,
         description: 'Граммидин с анестетиком нео - комбинированный препарат для лечения инфекционно-воспалительных заболеваний горла и полости рта.В состав препарата входит противомикробное средство грамицидин С, местноанестезирующее (обезболивающее) средство – оксибупрокаин и антисептическое средство - цетилпиридиния хлорид.',
-        image: '../../public/img/grammidin.jpg',
+        image: '/img/grammidin.jpg',
         count: 45,
         createdAt: new Date(),
         updatedAt: new Date()
