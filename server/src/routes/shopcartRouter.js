@@ -2,7 +2,8 @@ const express = require('express');
 const { User, Drug, ShopCart } = require('../../db/models');
 const shopcartRouter = require('express').Router();
 
-shopcartRouter.post('/shopcart', async (req, res) => {
+shopcartRouter
+ .post('/shopcart', async (req, res) => {
   const { userId, drugId, count } = req.body;
   try {
     const user = await User.findByPk(userId);
@@ -29,4 +30,13 @@ shopcartRouter.post('/shopcart', async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-});
+ })
+ .get('/cart/:userId', async (req, res) => {
+    const { userId } = req.params;
+    try {
+      const cartItems = await ShopCart.findAll({ where: { userId }, include: [Drug] });
+      res.json(cartItems);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  });
