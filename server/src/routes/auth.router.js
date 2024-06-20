@@ -1,5 +1,4 @@
 const authRouter = require('express').Router();
-
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 const generateTokens = require('../utils/generateTokens');
