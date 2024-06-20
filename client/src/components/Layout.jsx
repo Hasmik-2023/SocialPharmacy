@@ -1,14 +1,20 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-
 import NavBar from './ui/NavBar';
 
-export default function Layout() {
+export default function Layout({ user, handleLogout }) {
   return (
-    <Container>
-      <NavBar />
-      <Outlet />
-    </Container>
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <NavBar user={user} handleLogout={handleLogout}/>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <Outlet />
+        </div>
+      </div>
+    </div>
   );
 }

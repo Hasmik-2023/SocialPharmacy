@@ -1,12 +1,13 @@
 import React from 'react';
-
 import {
-  Container, Nav, Navbar, NavDropdown, NavLink,
+  Container, Nav, Navbar, NavDropdown,Button
 } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 import logo from '../../../public/logo.png';
 
-export default function NavBar() {
+export default function NavBar({ user, handleLogout }) {
+
   return (
     <Navbar expand="lg" className="navbar-dark bg-primary" style={{ height: '100px' }}>
       <Container>
@@ -32,18 +33,27 @@ export default function NavBar() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <>
-              <NavLink to="/auth/signin" className="nav-link">
-                Вход
-              </NavLink>
-              <NavLink to="/auth/signup" className="nav-link">
-                Регистрация
-              </NavLink>
-              <span className="nav-link">|</span>
-              <NavLink>
-                Корзина
-              </NavLink>
-            </>
+            {user ? (
+              <>
+                <span className="nav-link">Привет, {user.name}</span>
+                <Button className="nav-link" onClick={handleLogout}>
+                  Выход
+                </Button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/signin" className="nav-link">
+                  Вход
+                </NavLink>
+                <NavLink to="/signup" className="nav-link">
+                  Регистрация
+                </NavLink>
+              </>
+            )}
+            <span className="nav-link">|</span>
+            <NavLink to="/cart" className="nav-link">
+              Корзина
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const authRouter = require('./routes/auth.router');
+const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/userRouter');
 const tokenRouter = require('./routes/tokenRouter');
 const drugRouter = require('./routes/drugRouter');
@@ -8,6 +9,7 @@ const drugRouter = require('./routes/drugRouter');
 const app = express();
 
 app.use(morgan('dev'));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
