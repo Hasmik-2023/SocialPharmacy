@@ -9,8 +9,8 @@ export default function Cards({ card }) {
       <Card.Img variant="top" src={`http://localhost:3000/${card.image}`} />
       <Card.Body>
         {/* <Card.Title>{card.title}</Card.Title> */}
-        <Card.Text>{card.description}</Card.Text>
-        <Button variant="primary">Купить</Button>
+        <Card.Text><h4>{card.name}</h4></Card.Text>
+        <Button variant="primary">Добавить в Корзину</Button>
       </Card.Body>
     </Card>
   );

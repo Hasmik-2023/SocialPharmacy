@@ -80,7 +80,7 @@ module.exports = {
         name: 'Тандум Верде',
         price: 490,
         description: 'Оказывает противовоспалительное и местное обезболивающее действие, обладает антисептическим действием против широкого спектра микроорганизмов.Симптоматическая терапия болевого синдрома воспалительных заболеваний.',
-        image: '/img/tandumverda.jpeg',
+        image: '/img/tandumverde.jpg',
         count: 50,
         createdAt: new Date(),
         updatedAt: new Date()
