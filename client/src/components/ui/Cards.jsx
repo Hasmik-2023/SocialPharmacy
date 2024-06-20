@@ -2,8 +2,10 @@ import React from 'react';
 import {
   Card, Button, Row, Col,
 } from 'react-bootstrap';
+import useStore from '../../store';
 
 export default function Cards({ card }) {
+  const setContent = useStore((state) => state.setContent);
   return (
     <Card style={{ height: '100%' }}>
       <Card.Img variant="top" src={`http://localhost:3000/${card.image}`} />
@@ -11,6 +13,7 @@ export default function Cards({ card }) {
         {/* <Card.Title>{card.title}</Card.Title> */}
         <Card.Text><h4>{card.name}</h4></Card.Text>
         <Button variant="primary">Добавить в Корзину</Button>
+        <Button onClick={() => setContent(card.description)} variant="primary">подробнее...</Button>
       </Card.Body>
     </Card>
 

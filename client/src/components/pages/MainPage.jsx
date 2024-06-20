@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 
 import axiosInstance from '../api/axiosInstance';
 import Cards from '../ui/Cards';
+import DrugModal from '../ui/drugModal';
 
 export default function MainPage() {
   const [cards, setCards] = useState([]);
@@ -20,6 +21,7 @@ export default function MainPage() {
           </Col>
         ))}
       </Row>
+      <DrugModal />
     </Container>
   );
 }
