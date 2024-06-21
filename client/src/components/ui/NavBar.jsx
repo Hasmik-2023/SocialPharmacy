@@ -49,7 +49,7 @@ export default function NavBar({ user, handleLogout }) {
               </>
             )}
             <span className="nav-link">|</span>
-            <NavLink to="/cart" className="nav-link">
+            <NavLink to="/shopcart" className="nav-link">
               Корзина
             </NavLink>
           </Nav>

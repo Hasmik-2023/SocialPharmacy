@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import MainPage from './components/pages/MainPage';
 import LoginPage from './components/pages/LoginPage';
 import SignUpPage from './components/pages/SignUpPage';
+import ShopCartPage from './components/pages/ShopCartPage';
 import axiosInstance, { setAccessToken } from '../axiosInstance';
 // import ProtectedRoute from './components/hoc/ProtectedRoute';
 
@@ -74,7 +75,11 @@ function App() {
         {
           path: '/signin',
           element: <LoginPage handleLogin={handleLogin} />,
-        },   
+        },
+        {
+          path: '/shopcart',
+          element: <ShopCartPage user={user} />,
+        },
       ],
     },
   ];

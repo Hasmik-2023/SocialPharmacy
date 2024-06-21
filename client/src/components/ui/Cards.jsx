@@ -4,7 +4,7 @@ import {
 } from 'react-bootstrap';
 import useStore from '../../store';
 
-export default function Cards({ card }) {
+export default function Cards({ card, handleAddToShopcart }) {
   const setContent = useStore((state) => state.setContent);
   return (
     <Card style={{ height: '100%' }}>
@@ -13,8 +13,8 @@ export default function Cards({ card }) {
         {/* <Card.Title>{card.title}</Card.Title> */}
         <Card.Text><h4>{card.name}</h4></Card.Text>
         <Card.Text>{`${card.price} руб.`}</Card.Text>
-        <Button variant="primary">Добавить в Корзину</Button>
-        <Button onClick={() => setContent({ description: card.description, name: card.name })} variant="primary">подробнее...</Button>
+        <Button onClick={() => handleAddToShopcart(card.id)} variant="primary">Добавить в Корзину</Button>
+        <Button onClick={() => setContent({description: card.description, name: card.name})} variant="primary">подробнее...</Button>
       </Card.Body>
     </Card>
 
