@@ -1,9 +1,11 @@
 const express = require('express');
 const { User, Drug, ShopCart } = require('../../db/models');
+const verifyAccessToken = require('../middlewares/verifyAccessToken');
+const verifyRefreshToken = require('../middlewares/verifyRefreshToken');
 const shopcartRouter = require('express').Router();
 
 shopcartRouter
-  .post('/shopcart/:id', async (req, res) => {
+  .post('/:id', verifyRefreshToken, async (req, res) => {
     const { id } = req.params;
     try {
       const drug = await Drug.findByPk(id);
@@ -19,7 +21,7 @@ shopcartRouter
   
       // Найти или создать запись в корзине для пользователя и лекарства
       const [cartItem, created] = await ShopCart.findOrCreate({
-        where: { userId: res.locals.user.id, drugId: id },
+        where: { userId: res.locals.user.id, drugsId: id },
         defaults: { itemsCount: 1 }
       });
   
@@ -35,6 +37,7 @@ shopcartRouter
   
       res.status(201).json(cartItem);
     } catch (error) {
+      console.log(error);
       res.status(400).json({ error: error.message });
     }
   })

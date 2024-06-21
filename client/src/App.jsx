@@ -10,6 +10,7 @@ import ProtectedRouteForAuth from './components/hoc/ProtectedRouteForAuth';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [cartItems, setCartItems] = useState([]); // Add cartItems state
 
   useEffect(() => {
     axiosInstance('/tokens/refresh')
@@ -60,6 +61,11 @@ function App() {
     }
   };
 
+  const handleCheckout = () => {
+    // Implement checkout logic here
+    alert('Proceeding to checkout...');
+  };
+
   const routes = [
     {
       element: <Layout user={user} handleLogout={handleLogout} />,
@@ -71,7 +77,7 @@ function App() {
         {
           path: '/signup',
           element: (
-            <ProtectedRouteForAuth isAllowed={user !== null} redirectPath="/">
+            <ProtectedRouteForAuth isAllowed={!user} redirectPath="/">
               <SignUpPage handleSignUp={handleSignUp} />
             </ProtectedRouteForAuth>
           ),
@@ -79,7 +85,7 @@ function App() {
         {
           path: '/signin',
           element: (
-            <ProtectedRouteForAuth isAllowed={user !== null} redirectPath="/">
+            <ProtectedRouteForAuth isAllowed={!user} redirectPath="/">
               <LoginPage handleLogin={handleLogin} />
             </ProtectedRouteForAuth>
           ),
@@ -88,7 +94,7 @@ function App() {
           path: '/shopcart',
           element: (
             <ProtectedRouteForAuth isAllowed={user !== null} redirectPath="/">
-              <ShopCartPage handleSignUp={handleSignUp} />
+              <ShopCartPage cartItems={cartItems} handleCheckout={handleCheckout} />
             </ProtectedRouteForAuth>
           ),
         },

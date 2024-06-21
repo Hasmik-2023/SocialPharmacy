@@ -80,7 +80,7 @@ export default function MainPage({ user }) { // Accept user prop
           </Col>
         ))}
       </Row>
-      <DrugModal />
+      <DrugModal handleAddToShopcart={handleAddToShopcart} />
     </Container>
   );
 }

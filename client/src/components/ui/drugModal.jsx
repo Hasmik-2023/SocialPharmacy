@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 
 import useStore from '../../store';
 
-export default function DrugModal() {
+export default function DrugModal({handleAddToShopcart}) {
   const content = useStore((state) => state.content);
   const setContent = useStore((state) => state.setContent);
   return (
@@ -20,7 +20,7 @@ export default function DrugModal() {
           <div>{`Цена: ${content?.price} руб.`}</div>
           <div>{`В наличии: ${content?.count} шт.`}</div>
         </Modal.Title>
-        <Button variant="primary">Добавить в Корзину</Button>
+        <Button variant="primary" onClick={()=>handleAddToShopcart(content.id)}>Добавить в Корзину</Button>
       </Modal.Footer>
     </Modal>
   );

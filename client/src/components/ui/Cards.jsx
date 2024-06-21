@@ -16,7 +16,7 @@ export default function Cards({ card, handleAddToShopcart, user }) { // Accept u
         )}
         <Button
           onClick={() => setContent({
-            description: card.description, name: card.name, price: card.price, count: card.count,
+            description: card.description, name: card.name, price: card.price, count: card.count, id: card.id
           })}
           variant="primary"
         >
