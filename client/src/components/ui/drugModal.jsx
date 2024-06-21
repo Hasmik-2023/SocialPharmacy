@@ -6,7 +6,6 @@ import useStore from '../../store';
 export default function DrugModal({ card }) {
   const content = useStore((state) => state.content);
   const setContent = useStore((state) => state.setContent);
-  console.log(content);
   return (
     <Modal show={!!content} onHide={() => { setContent(null); }}>
       <Modal.Header closeButton>

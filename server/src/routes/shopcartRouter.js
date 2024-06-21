@@ -3,42 +3,49 @@ const { User, Drug, ShopCart } = require('../../db/models');
 const shopcartRouter = require('express').Router();
 
 shopcartRouter
-  .post('/shopcart', async (req, res) => {
-    const { userId, drugId, count } = req.body;
+  .post('/shopcart/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-      const user = await User.findByPk(userId);
-      const drug = await Drug.findByPk(drugId);
-      if (!user || !drug) {
-        return res.status(404).json({ error: 'Пользователь или лекарство не найдены' });
-      }
-      if (drug.count < count) {
-        return res.status(400).json({ error: 'Данного лекарства недостаточно' });
-      }
+      const drug = await Drug.findByPk(id);
 
-      let cartItem = await ShopCart.findOne({ where: { userId: user.id, drugId: drug.id } });
-      if (cartItem) {
-        cartItem.count += count;
+      if (!drug) {
+        return res.status(404).json({ error: 'Лекарство не найдено' });
+      }
+  
+      // Проверить, что на складе есть хотя бы одно лекарство
+      if (drug.count < 1) {
+        return res.status(400).json({ error: 'Недостаточное количество лекарства на складе' });
+      }
+  
+      // Найти или создать запись в корзине для пользователя и лекарства
+      const [cartItem, created] = await ShopCart.findOrCreate({
+        where: { userId: res.locals.user.id, drugId: id },
+        defaults: { itemsCount: 1 }
+      });
+  
+      if (!created) {
+        // Если запись уже существует, обновить количество
+        cartItem.itemsCount += 1;
         await cartItem.save();
-      } else {
-        cartItem = await ShopCart.create({ userId: user.id, drugId: drug.id, count });
       }
-
-      drug.count -= count;
+  
+      // Уменьшить количество лекарства на складе
+      drug.count -= 1;
       await drug.save();
-
-      res.json(cartItem);
+  
+      res.status(201).json(cartItem);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   })
-  .get('/cart/:userId', async (req, res) => {
-    const { userId } = req.params;
-    try {
-      const cartItems = await ShopCart.findAll({ where: { userId }, include: [Drug] });
-      res.json(cartItems);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  });
+  // .get('/shopcart/:userId', async (req, res) => {
+  //   const { userId } = req.params;
+  //   try {
+  //     const cartItems = await ShopCart.findAll({ where: { userId }, include: [Drug] });
+  //     res.json(cartItems);
+  //   } catch (error) {
+  //     res.status(400).json({ error: error.message });
+  //   }
+  // });
 
 module.exports = shopcartRouter;

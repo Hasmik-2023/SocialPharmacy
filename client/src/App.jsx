@@ -4,8 +4,9 @@ import Layout from './components/Layout';
 import MainPage from './components/pages/MainPage';
 import LoginPage from './components/pages/LoginPage';
 import SignUpPage from './components/pages/SignUpPage';
+import ShopCartPage from './components/pages/ShopCartPage';
 import axiosInstance, { setAccessToken } from '../axiosInstance';
-// import ProtectedRoute from './components/hoc/ProtectedRoute';
+import ProtectedRouteForAuth from './components/hoc/ProtectedRouteForAuth';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -65,16 +66,24 @@ function App() {
       children: [
         {
           path: '/',
-          element: <MainPage user={user} />,
+          element: <MainPage user={user} />, // Pass user prop here
         },
         {
           path: '/signup',
-          element: <SignUpPage handleSignUp={handleSignUp} />,
+          element: (
+            <ProtectedRouteForAuth isAllowed={user !== null} redirectPath="/">
+              <SignUpPage handleSignUp={handleSignUp} />
+            </ProtectedRouteForAuth>
+          ),
         },
         {
           path: '/signin',
-          element: <LoginPage handleLogin={handleLogin} />,
-        },   
+          element: (
+            <ProtectedRouteForAuth isAllowed={user !== null} redirectPath="/">
+              <LoginPage handleLogin={handleLogin} />
+            </ProtectedRouteForAuth>
+          ),
+        },
       ],
     },
   ];

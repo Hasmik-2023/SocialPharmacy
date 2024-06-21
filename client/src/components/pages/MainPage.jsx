@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Container, Row, Button } from 'react-bootstrap';
+import { Col, Container, Row, Card, Button } from 'react-bootstrap';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 
 import axiosInstance from '../api/axiosInstance';
@@ -8,8 +10,10 @@ import DrugModal from '../ui/drugModal';
 import './MainPage.css';
 
 
-export default function MainPage() {
+export default function MainPage({ user }) { // Accept user prop
   const [cards, setCards] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [date, setDate] = useState(new Date());
   const [sortedCards, setSortedCards] = useState([]);
 
   useEffect(() => {
@@ -18,6 +22,28 @@ export default function MainPage() {
       setSortedCards(res.data);
     });
   }, []);
+
+  const handleAddToShopcart = async (drugId) => {
+    try {
+      const response = await axiosInstance.post(`/shopcart/${drugId}`);
+      const updatedCart = [...cart];
+      const existingItem = updatedCart.find((item) => item.drugId === drugId);
+      if (existingItem) {
+        existingItem.count += 1;
+      } else {
+        updatedCart.push({ drugId });
+      }
+      if (response.status === 201) {
+        setCart(updatedCart);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDateChange = (newDate) => {
+    setDate(newDate);
+  };
 
   const sortByPrice = (order) => {
     const sorted = [...sortedCards].sort((a, b) => {
