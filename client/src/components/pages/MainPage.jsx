@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Container, Row, Card, Button } from 'react-bootstrap';
+import {
+  Col, Container, Row, Card, Button,
+} from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-
 
 import axiosInstance from '../api/axiosInstance';
 import Cards from '../ui/Cards';
 import DrugModal from '../ui/drugModal';
 import './MainPage.css';
-
 
 export default function MainPage({ user }) { // Accept user prop
   const [cards, setCards] = useState([]);
@@ -57,18 +57,25 @@ export default function MainPage({ user }) { // Accept user prop
 
   return (
     <Container className="my-5">
+      <Col md={6}>
+        <Card>
+          <Card.Body>
+            <Calendar onChange={handleDateChange} value={date} />
+          </Card.Body>
+        </Card>
+      </Col>
       <div className="d-flex justify-content-end mb-3">
         <span className="sort-label">Сортировка по цене</span>
         <Button variant="primary" className="me-2" onClick={() => sortByPrice('asc')}>
-        ↑
+          ↑
         </Button>
         <Button variant="primary" onClick={() => sortByPrice('desc')}>
-        ↓
+          ↓
         </Button>
       </div>
       <Row className="justify-content-center g-4">
         {sortedCards?.map((card) => (
-          <Col md={3} key={card.id}> 
+          <Col md={3} key={card.id}>
             <Cards card={card} />
           </Col>
         ))}
