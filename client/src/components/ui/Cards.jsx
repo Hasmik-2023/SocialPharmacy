@@ -6,6 +6,8 @@ import useStore from '../../store';
 
 export default function Cards({ card }) {
   const setContent = useStore((state) => state.setContent);
+  
+
   return (
     <Card style={{ height: '100%' }}>
       <Card.Img variant="top" src={`http://localhost:3000/${card.image}`} />
