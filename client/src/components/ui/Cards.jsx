@@ -14,7 +14,14 @@ export default function Cards({ card, handleAddToShopcart, user }) { // Accept u
         {user && (
           <Button onClick={() => handleAddToShopcart(card.id)} variant="primary">Добавить в Корзину</Button>
         )}
-        <Button onClick={() => setContent({description: card.description, name: card.name})} variant="primary">подробнее...</Button>
+        <Button
+          onClick={() => setContent({
+            description: card.description, name: card.name, price: card.price, count: card.count,
+          })}
+          variant="primary"
+        >
+          подробнее...
+        </Button>
       </Card.Body>
     </Card>
   );

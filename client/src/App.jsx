@@ -84,6 +84,14 @@ function App() {
             </ProtectedRouteForAuth>
           ),
         },
+        {
+          path: '/shopcart',
+          element: (
+            <ProtectedRouteForAuth isAllowed={user !== null} redirectPath="/">
+              <ShopCartPage handleSignUp={handleSignUp} />
+            </ProtectedRouteForAuth>
+          ),
+        },
       ],
     },
   ];
