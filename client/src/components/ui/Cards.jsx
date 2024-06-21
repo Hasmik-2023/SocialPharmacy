@@ -10,10 +10,11 @@ export default function Cards({ card, user }) { // Accept user prop
       <Card.Img variant="top" src={`http://localhost:3000/${card.image}`} />
       <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         <Card.Text><h4>{card.name}</h4></Card.Text>
+        <Card.Text>{`${card.price} руб.`}</Card.Text>
         {user && (
           <Button variant="primary">Добавить в Корзину</Button>
         )}
-        <Button onClick={() => setContent(card.description)} variant="primary">подробнее...</Button>
+        <Button onClick={() => setContent({ description: card.description, name: card.name })} variant="primary">подробнее...</Button>
       </Card.Body>
     </Card>
   );

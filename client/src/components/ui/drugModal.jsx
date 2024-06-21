@@ -6,12 +6,19 @@ import useStore from '../../store';
 export default function DrugModal({ card }) {
   const content = useStore((state) => state.content);
   const setContent = useStore((state) => state.setContent);
+  console.log(content);
   return (
     <Modal show={!!content} onHide={() => { setContent(null); }}>
       <Modal.Header closeButton>
-        <Modal.Title>Информация о препарате</Modal.Title>
+        <Modal.Title>{content?.name}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{content}</Modal.Body>
+      <Modal.Body>
+        {content?.description}
+      </Modal.Body>
+      <Modal.Footer>
+        {content?.price}
+        <Button variant="primary">Добавить в Корзину</Button>
+      </Modal.Footer>
     </Modal>
   );
 }
